@@ -12,5 +12,19 @@ watts_json.py
 
 東電の電力使用量gifファイルを解析してjsonファイルを吐き出すスクリプトです。
 
+電力の使用状況グラフ(東京電力)
+http://www.tepco.co.jp.cache.yimg.jp/forecast/index-j.html
+
 とりあえず作ってみただけなので勝手に持って行って使ってください。
 ライセンスは改変BSDにしてあります。
+
+
+http://s1.fukuda.org/watts/
+で、watts_json.py による出力結果を公開しています。
+
+最新のデータからwatts.jsonにシンボリックリンクを貼ってあるので、通常は
+
+http://s1.fukuda.org/watts/watts.json
+
+を使って頂ければよいと思います
+

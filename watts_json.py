@@ -6,11 +6,18 @@ import datetime
 import json
 import os
 
+
+
 class Watts(object):
     def __init__(self):
-        urllib.urlretrieve('http://www.tepco.co.jp.cache.yimg.jp/forecast/html/images/juyo-j.gif', '/tmp/juyo-j.gif')
+        #imgurl = "http://www.tepco.co.jp/forecast/html/images/juyo-j.gif"
+        imgurl = "http://www.tepco.co.jp.cache.yimg.jp/forecast/html/images/juyo-j.gif"
 
-        self.im = Image.open('/tmp/juyo-j.gif')
+        tmpfile = '/tmp/juyo-j.gif'
+
+        urllib.urlretrieve(imgurl, tmpfile)
+
+        self.im = Image.open(tmpfile)
         self.data = list(self.im.getdata())
         self.x = self.im.size[0]
         self.y = self.im.size[1]
