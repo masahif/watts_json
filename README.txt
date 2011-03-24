@@ -1,3 +1,18 @@
+※お知らせ
+2011/03/24現在、
+東京電力からCSVデータの提供が開始されています。
+そちらを使いましょう
+
+http://www.tepco.co.jp/forecast/index-j.html
+http://www.tepco.co.jp/forecast/html/images/juyo-j.csv
+
+
+
+
+
+
+
+------------------------------
 watts_json.py
 
 A watts_json.py is a script which convert watss usage data of TEPCO to json file.
