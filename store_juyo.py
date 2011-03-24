@@ -3,6 +3,8 @@
 import urllib2
 import datetime
 import sys
+import csv
+import json
 
 BASE_DIR = "./tmp/"
 
@@ -31,7 +33,7 @@ def check_and_save(url, filename, last_modified_file):
     except urllib2.HTTPError, e:
         if e.code == 304:
             print "%s was not modified" % filename
-            return
+            return False
         else:
             sys.exit(1)
     
@@ -42,8 +44,21 @@ def check_and_save(url, filename, last_modified_file):
     f = open(BASE_DIR + filename, 'w')
     f.write(s.read())
     
-    return
+    return True
 
-check_and_save(CSV_URL, "%s-juyo_j.csv" % TODAY_STR, CSV_LAST_MODIFIED_TXT)
 check_and_save(HTML_URL, "%s-juyo_j.html" % TODAY_STR, HTML_LAST_MODIFIED_TXT)
 check_and_save(GIF_URL, "%s-juyo_j.gif" % TODAY_STR, GIF_LAST_MODIFIED_TXT)
+
+if check_and_save(CSV_URL, "%s-juyo_j.csv" % TODAY_STR, CSV_LAST_MODIFIED_TXT):
+    data = list()
+    jcsv = csv.reader(open(BASE_DIR + "%s-juyo_j.csv" % TODAY_STR, 'rb'), delimiter=',')
+
+    last_modified = jcsv.next()
+    headers = jcsv.next()
+    headers = [h.decode('sjis') for h in headers]
+    for row in jcsv:
+        data.append(row)
+
+    f = open(BASE_DIR + "watts.json", "wb")
+    json.dump({"last_modified":last_modified, "headers":headers, "data":data}, f)
+    f.close()
